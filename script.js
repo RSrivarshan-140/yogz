@@ -1,9 +1,7 @@
 /* ========================================================
    YOGESHWARI PORTFOLIO — script.js
-   Interactive terminal, typed text, scroll reveals,
-   skill bar animations, spark & ripple effects.
-   NOTE: Aurora canvas & swarm animation are handled by
-   app.js and swarm-init.js (exact copy from reference portfolio)
+   Terminal, typed text, skill bars, back-to-top, sparks.
+   Aurora canvas & swarm animation handled by app.js + swarm-init.js
    ======================================================== */
 
 'use strict';
@@ -14,7 +12,9 @@
   if (!el) return;
   function tick() {
     const d = new Date();
-    el.textContent = d.toLocaleTimeString('en-IN', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    el.textContent = d.toLocaleTimeString('en-IN', {
+      hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit'
+    });
   }
   tick();
   setInterval(tick, 1000);
@@ -59,6 +59,10 @@
 // ============ SCROLL REVEAL ============
 (function initReveal() {
   const els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(el => el.classList.add('visible'));
+    return;
+  }
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -66,13 +70,17 @@
         obs.unobserve(e.target);
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.1 });
   els.forEach(el => obs.observe(el));
 })();
 
 // ============ SKILL BAR ANIMATION ============
 (function initSkillBars() {
   const bars = document.querySelectorAll('.skill-bar-fill');
+  if (!('IntersectionObserver' in window)) {
+    bars.forEach(b => b.classList.add('animated'));
+    return;
+  }
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -90,7 +98,7 @@
   if (!btn) return;
   window.addEventListener('scroll', () => {
     btn.classList.toggle('visible', window.scrollY > 400);
-  });
+  }, { passive: true });
   btn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
@@ -108,14 +116,13 @@
       bar.style.background = 'var(--panel)';
       bar.style.boxShadow = 'none';
     }
-  });
+  }, { passive: true });
 })();
 
 // ============ SPARK / CLICK EFFECT ============
 (function initSparkEffect() {
-  document.addEventListener('click', function(e) {
-    // Don't create sparks on interactive elements
-    if (e.target.closest('a, button, input, .cmd-pill')) return;
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('a, button, input, .cmd-pill, .cyber-btn')) return;
     createSparks(e.clientX, e.clientY);
   });
 
@@ -123,174 +130,49 @@
     const count = 6;
     for (let i = 0; i < count; i++) {
       const spark = document.createElement('div');
+      const isRed = Math.random() > 0.5;
       spark.style.cssText = `
-        position:fixed;
-        left:${x}px; top:${y}px;
-        width:4px; height:4px;
-        border-radius:50%;
-        background:${Math.random() > 0.5 ? '#e6193c' : '#f5ee38'};
-        pointer-events:none;
-        z-index:9999;
-        transform-origin:center;
+        position:fixed;left:${x}px;top:${y}px;
+        width:4px;height:4px;border-radius:50%;
+        background:${isRed ? '#e6193c' : '#f5ee38'};
+        pointer-events:none;z-index:9999;
       `;
       document.body.appendChild(spark);
       const angle = (Math.PI * 2 * i) / count + Math.random() * 0.5;
       const dist  = 30 + Math.random() * 50;
-      const dx = Math.cos(angle) * dist;
-      const dy = Math.sin(angle) * dist;
       spark.animate([
         { transform: 'translate(-50%,-50%) scale(1)', opacity: 1 },
-        { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(0)`, opacity: 0 }
-      ], { duration: 500 + Math.random() * 200, easing: 'cubic-bezier(0,0.9,0.57,1)' }).onfinish = () => spark.remove();
+        { transform: `translate(calc(-50% + ${Math.cos(angle) * dist}px), calc(-50% + ${Math.sin(angle) * dist}px)) scale(0)`, opacity: 0 }
+      ], {
+        duration: 500 + Math.random() * 200,
+        easing: 'cubic-bezier(0,0.9,0.57,1)'
+      }).onfinish = () => spark.remove();
     }
   }
 })();
 
-// ============ INTERACTIVE TERMINAL ============
-(function initTerminal() {
-  const output  = document.getElementById('term-output');
-  const input   = document.getElementById('term-input');
-  const pills   = document.querySelectorAll('.cmd-pill');
-  if (!output || !input) return;
-
-  const COMMANDS = {
-    help: () => [
-      { type: 'cyan', text: '// Available commands:' },
-      { type: 'out',  text: '  bio       — about me' },
-      { type: 'out',  text: '  skills    — tech stack' },
-      { type: 'out',  text: '  projects  — my builds' },
-      { type: 'out',  text: '  github    — GitHub profile' },
-      { type: 'out',  text: '  instagram — Instagram handle' },
-      { type: 'out',  text: '  contact   — contact info' },
-      { type: 'out',  text: '  quote     — dev quote' },
-      { type: 'out',  text: '  clear     — clear terminal' },
-    ],
-    bio: () => [
-      { type: 'bold', text: 'Yogeshwari — Developer & Creator' },
-      { type: 'out',  text: 'Location : Tamil Nadu, India' },
-      { type: 'out',  text: 'Focus    : Full-Stack Web Development' },
-      { type: 'out',  text: 'Passion  : Code · Design · Innovation' },
-      { type: 'green',text: 'Status   : AVAILABLE FOR COLLABORATION ⚡' },
-    ],
-    skills: () => [
-      { type: 'cyan', text: '// Tech Stack' },
-      { type: 'out',  text: '  Languages : Python · JavaScript · Java · C/C++' },
-      { type: 'out',  text: '  Frontend  : HTML · CSS · React.js' },
-      { type: 'out',  text: '  Backend   : Node.js · Django · REST APIs' },
-      { type: 'out',  text: '  Databases : MySQL · MongoDB' },
-      { type: 'out',  text: '  Tools     : Git · GitHub · VS Code · Linux' },
-      { type: 'out',  text: '  Learning  : AI / ML Integration ← active' },
-    ],
-    projects: () => [
-      { type: 'cyan',    text: '// Project Queue' },
-      { type: 'crimson', text: '  [1] Personal Portfolio (HTML/CSS/JS)' },
-      { type: 'out',     text: '  [2] AI Chat Application (Python/Flask)' },
-      { type: 'out',     text: '  [3] E-Commerce Platform (React/Node/MongoDB)' },
-      { type: 'out',     text: '  [4] Data Analytics Dashboard (Python)' },
-      { type: 'out',     text: '  [5] Student Management System (Django)' },
-      { type: 'out',     text: '  [6] Weather Forecast App (JS/API)' },
-    ],
-    github: () => [
-      { type: 'bold', text: '→ GitHub Profile' },
-      { type: 'cyan', text: '  https://github.com/Yogeshwari2908-max' },
-      { type: 'out',  text: '  Username: Yogeshwari2908-max' },
-    ],
-    instagram: () => [
-      { type: 'bold', text: '→ Instagram' },
-      { type: 'cyan', text: '  https://www.instagram.com/yog_zzz07_/' },
-      { type: 'out',  text: '  Handle: @yog_zzz07_' },
-    ],
-    contact: () => [
-      { type: 'cyan',    text: '// Contact Information' },
-      { type: 'out',     text: '  GitHub    : Yogeshwari2908-max' },
-      { type: 'out',     text: '  Instagram : @yog_zzz07_' },
-      { type: 'out',     text: '  Location  : Tamil Nadu, India' },
-      { type: 'green',   text: '  Status    : Open to collaboration & opportunities ⚡' },
-    ],
-    quote: () => {
-      const quotes = [
-        '"Any fool can write code that a computer can understand. Good programmers write code that humans can understand." — Martin Fowler',
-        '"First, solve the problem. Then, write the code." — John Johnson',
-        '"Code is like humor. When you have to explain it, it\'s bad." — Cory House',
-        '"The best way to predict the future is to implement it." — Alan Kay',
-        '"Simplicity is the soul of efficiency." — Austin Freeman',
-      ];
-      return [{ type: 'cyan', text: quotes[Math.floor(Math.random() * quotes.length)] }];
-    },
-    clear: null, // handled separately
-    whoami: () => [
-      { type: 'bold', text: 'Yogeshwari — Developer & Creator' },
-    ],
-  };
-
-  function addLine(cls, html) {
-    const div = document.createElement('div');
-    div.className = `term-line term-out ${cls}`;
-    div.innerHTML = html;
-    output.appendChild(div);
-  }
-
-  function addBlankLine() {
-    const div = document.createElement('div');
-    div.className = 'term-line';
-    div.innerHTML = '&nbsp;';
-    output.appendChild(div);
-  }
-
-  function addPromptLine(cmd) {
-    const div = document.createElement('div');
-    div.className = 'term-line';
-    div.innerHTML = `<span class="term-prompt">yogeshwari@dev:~$ </span><span class="term-cmd">${escHtml(cmd)}</span>`;
-    output.appendChild(div);
-  }
-
-  function escHtml(s) {
-    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
-  function runCmd(cmd) {
-    const c = cmd.trim().toLowerCase();
-    if (!c) return;
-
-    addBlankLine();
-    addPromptLine(c);
-
-    if (c === 'clear') {
-      output.innerHTML = '';
-      return;
-    }
-
-    const handler = COMMANDS[c];
-    if (handler) {
-      const lines = typeof handler === 'function' ? handler() : [];
-      lines.forEach(l => addLine(l.type, escHtml(l.text)));
-    } else {
-      addLine('crimson', `Command not found: '${escHtml(c)}'. Type 'help' for commands.`);
-    }
-
-    addBlankLine();
-    output.scrollTop = output.scrollHeight;
-  }
-
-  // Input handler
-  input.addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-      const val = input.value;
-      input.value = '';
-      runCmd(val);
-    }
+// ============ RIPPLE ON BUTTONS ============
+document.querySelectorAll('.cyber-btn').forEach(btn => {
+  btn.addEventListener('click', function (e) {
+    const rect = this.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const ripple = document.createElement('span');
+    ripple.style.cssText = `
+      position:absolute;border-radius:50%;pointer-events:none;z-index:0;
+      width:${size}px;height:${size}px;
+      left:${e.clientX - rect.left - size / 2}px;
+      top:${e.clientY - rect.top - size / 2}px;
+      background:rgba(0,240,255,0.2);transform:scale(0);
+    `;
+    this.style.position = 'relative';
+    this.style.overflow = 'hidden';
+    this.appendChild(ripple);
+    ripple.animate(
+      [{ transform: 'scale(0)', opacity: 1 }, { transform: 'scale(2.5)', opacity: 0 }],
+      { duration: 500, easing: 'ease-out' }
+    ).onfinish = () => ripple.remove();
   });
-
-  // Command pills
-  pills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      runCmd(pill.dataset.cmd);
-    });
-  });
-
-  // Auto-scroll on load
-  output.scrollTop = output.scrollHeight;
-})();
+});
 
 // ============ SMOOTH SCROLL FOR ANCHOR LINKS ============
 document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -303,42 +185,114 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// ============ RIPPLE ON CYBER-BTN CLICK ============
-document.querySelectorAll('.cyber-btn').forEach(btn => {
-  btn.addEventListener('click', function(e) {
-    const rect = this.getBoundingClientRect();
-    const ripple = document.createElement('span');
-    const size = Math.max(rect.width, rect.height);
-    ripple.style.cssText = `
-      position:absolute;
-      width:${size}px; height:${size}px;
-      left:${e.clientX - rect.left - size/2}px;
-      top:${e.clientY - rect.top - size/2}px;
-      border-radius:50%;
-      background:rgba(0,240,255,0.25);
-      pointer-events:none;
-      z-index:0;
-      transform:scale(0);
-    `;
-    this.style.position = 'relative';
-    this.style.overflow = 'hidden';
-    this.appendChild(ripple);
-    ripple.animate(
-      [{ transform: 'scale(0)', opacity: 1 }, { transform: 'scale(2)', opacity: 0 }],
-      { duration: 500, easing: 'ease-out' }
-    ).onfinish = () => ripple.remove();
-  });
-});
+// ============ INTERACTIVE TERMINAL ============
+(function initTerminal() {
+  const output = document.getElementById('term-output');
+  const input  = document.getElementById('term-input');
+  const pills  = document.querySelectorAll('.cmd-pill');
+  if (!output || !input) return;
 
-// ============ SECTION ACTIVE HIGHLIGHT (NAV) ============
-(function initSectionHighlight() {
-  const sections = document.querySelectorAll('section[id], .stack[id]');
-  const hudLinks = document.querySelectorAll('.hud-link');
+  const COMMANDS = {
+    help: () => [
+      { cls: 'cyan',   text: '// Available commands:' },
+      { cls: '',       text: '  bio · skills · projects · github · instagram · contact · quote · clear' },
+    ],
+    bio: () => [
+      { cls: 'bold',   text: 'Yogeshwari — Developer & Creator' },
+      { cls: '',       text: 'Location : Tamil Nadu, India' },
+      { cls: '',       text: 'Focus    : Full-Stack Web Development' },
+      { cls: 'green',  text: 'Status   : AVAILABLE FOR COLLABORATION ⚡' },
+    ],
+    skills: () => [
+      { cls: 'cyan',   text: '// Tech Stack' },
+      { cls: '',       text: '  Languages : Python · JavaScript · Java · C/C++' },
+      { cls: '',       text: '  Frontend  : HTML · CSS · React.js' },
+      { cls: '',       text: '  Backend   : Node.js · Django · REST APIs' },
+      { cls: '',       text: '  Databases : MySQL · MongoDB' },
+      { cls: '',       text: '  Tools     : Git · GitHub · VS Code · Linux' },
+      { cls: '',       text: '  Learning  : AI / ML Integration ← active' },
+    ],
+    projects: () => [
+      { cls: 'cyan',    text: '// Project Queue' },
+      { cls: 'crimson', text: '  [1] Personal Portfolio (HTML/CSS/JS)' },
+      { cls: '',        text: '  [2] AI Chat Application (Python/Flask)' },
+      { cls: '',        text: '  [3] E-Commerce Platform (React/Node/MongoDB)' },
+      { cls: '',        text: '  [4] Data Analytics Dashboard (Python)' },
+      { cls: '',        text: '  [5] Student Management System (Django)' },
+      { cls: '',        text: '  [6] Weather Forecast App (JS/API)' },
+    ],
+    github: () => [
+      { cls: 'bold',   text: '→ GitHub Profile' },
+      { cls: 'cyan',   text: '  https://github.com/Yogeshwari2908-max' },
+    ],
+    instagram: () => [
+      { cls: 'bold',   text: '→ Instagram' },
+      { cls: 'cyan',   text: '  https://www.instagram.com/yog_zzz07_/' },
+      { cls: '',       text: '  Handle: @yog_zzz07_' },
+    ],
+    contact: () => [
+      { cls: 'cyan',   text: '// Contact Information' },
+      { cls: '',       text: '  GitHub    : Yogeshwari2908-max' },
+      { cls: '',       text: '  Instagram : @yog_zzz07_' },
+      { cls: 'green',  text: '  Status    : Open to collaboration ⚡' },
+    ],
+    quote: () => {
+      const quotes = [
+        '"Any fool can write code that a computer can understand. Good programmers write code that humans can understand." — Fowler',
+        '"First, solve the problem. Then, write the code." — John Johnson',
+        '"Code is like humor. When you have to explain it, it\'s bad." — Cory House',
+        '"The best way to predict the future is to implement it." — Alan Kay',
+        '"Simplicity is the soul of efficiency." — Austin Freeman',
+      ];
+      return [{ cls: 'cyan', text: quotes[Math.floor(Math.random() * quotes.length)] }];
+    },
+    whoami: () => [{ cls: 'bold', text: 'Yogeshwari — Developer & Creator' }],
+  };
 
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 100) current = s.id;
-    });
+  function esc(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function addBlank() {
+    const d = document.createElement('div');
+    d.className = 'term-line';
+    d.innerHTML = '&nbsp;';
+    output.appendChild(d);
+  }
+
+  function addPrompt(cmd) {
+    const d = document.createElement('div');
+    d.className = 'term-line';
+    d.innerHTML = `<span class="term-prompt">yogeshwari@dev:~$ </span><span class="term-cmd">${esc(cmd)}</span>`;
+    output.appendChild(d);
+  }
+
+  function addLine(cls, text) {
+    const d = document.createElement('div');
+    d.className = `term-line term-out ${cls}`;
+    d.textContent = text;
+    output.appendChild(d);
+  }
+
+  function runCmd(cmd) {
+    const c = cmd.trim().toLowerCase();
+    if (!c) return;
+    addBlank();
+    addPrompt(c);
+    if (c === 'clear') { output.innerHTML = ''; return; }
+    const handler = COMMANDS[c];
+    if (handler) {
+      handler().forEach(l => addLine(l.cls, l.text));
+    } else {
+      addLine('crimson', `Command not found: '${c}'. Type 'help'.`);
+    }
+    addBlank();
+    output.scrollTop = output.scrollHeight;
+  }
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { const v = input.value; input.value = ''; runCmd(v); }
   });
+  pills.forEach(p => p.addEventListener('click', () => runCmd(p.dataset.cmd)));
+  output.scrollTop = output.scrollHeight;
 })();

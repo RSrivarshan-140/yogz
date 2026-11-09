@@ -811,6 +811,13 @@ ul { list-style: none; }
   height: 100vh;
 }
 
+/* Swarm cursor agents sit above everything except the HUD */
+.cyber-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 8999;
+}
+
 /* Ensure all page content sits above canvas */
 .cyber-bar, .hero, .stack, .cyber-footer, .back-to-top {
   position: relative;
