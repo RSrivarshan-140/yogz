@@ -1,58 +1,12 @@
 /* ========================================================
    YOGESHWARI PORTFOLIO — script.js
-   Interactive terminal, aurora canvas, typed text,
-   scroll reveals, skill bar animations, spark effects
+   Interactive terminal, typed text, scroll reveals,
+   skill bar animations, spark & ripple effects.
+   NOTE: Aurora canvas & swarm animation are handled by
+   app.js and swarm-init.js (exact copy from reference portfolio)
    ======================================================== */
 
 'use strict';
-
-// ============ AURORA CANVAS ============
-(function initAurora() {
-  const canvas = document.getElementById('aurora-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let W, H, animId;
-
-  function resize() {
-    W = canvas.width  = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  // Style canvas as fixed background
-  canvas.style.cssText = 'position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.4;';
-
-  const blobs = Array.from({ length: 4 }, (_, i) => ({
-    x: Math.random() * window.innerWidth,
-    y: Math.random() * window.innerHeight,
-    r: 180 + i * 60,
-    dx: (Math.random() - 0.5) * 0.4,
-    dy: (Math.random() - 0.5) * 0.4,
-    hue: [350, 10, 190, 60][i], // crimson, crimson-bright, cyan, bolt
-    alpha: 0.08 + i * 0.03
-  }));
-
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    blobs.forEach(b => {
-      b.x += b.dx; b.y += b.dy;
-      if (b.x < -b.r) b.x = W + b.r;
-      if (b.x > W + b.r) b.x = -b.r;
-      if (b.y < -b.r) b.y = H + b.r;
-      if (b.y > H + b.r) b.y = -b.r;
-      const g = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r);
-      g.addColorStop(0, `hsla(${b.hue},100%,55%,${b.alpha})`);
-      g.addColorStop(1, 'transparent');
-      ctx.beginPath();
-      ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-      ctx.fillStyle = g;
-      ctx.fill();
-    });
-    animId = requestAnimationFrame(draw);
-  }
-  draw();
-})();
 
 // ============ HUD CLOCK ============
 (function initClock() {
