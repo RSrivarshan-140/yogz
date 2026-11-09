@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yogeshwari · Developer Portfolio</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts matching reference portfolio -->
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+
+  <!-- =========== AURORA CANVAS =========== -->
+  <canvas id="aurora-canvas"></canvas>
+
+  <!-- =========== TOP HUD BAR =========== -->
+  <header class="cyber-bar">
+    <div class="cyber-bar-left">
+      <span class="status-dot"></span>
+      <span>YOGESHWARI — PORTFOLIO</span>
+      <span style="color:var(--fg-dim)">·</span>
+      <span class="bolt-text">⚡ ONLINE</span>
+    </div>
+    <div class="cyber-bar-right">
+      <a href="https://github.com/Yogeshwari2908-max" target="_blank" class="hud-link">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+      <a href="https://www.instagram.com/yog_zzz07_/" target="_blank" class="hud-link">
+        <i class="fab fa-instagram"></i> @yog_zzz07_
+      </a>
+      <span class="cyan-text" id="hud-time"></span>
+    </div>
+  </header>
+
+  <!-- =========== HERO SECTION =========== -->
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <!-- Left: Text -->
+      <div class="hero-text-col">
+        <p class="hero-label">DEVELOPER · INNOVATOR · CREATOR</p>
+        <h1 class="hero-name">
+          YOGE<span class="bolt-accent">⚡</span>SHWARI
+        </h1>
+        <p class="hero-subtitle">
+          <span class="typed-text" id="typed-text"></span><span class="cursor-blink">_</span>
+        </p>
+        <p class="hero-desc">
+          A passionate developer crafting meaningful digital experiences through clean code, 
+          creative design, and a relentless drive to solve complex problems. 
+          Based in Tamil Nadu, India.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="cyber-btn primary">
+            ⚡ TRANSMIT MESSAGE
+          </a>
+          <a href="#projects" class="cyber-btn cyan">
+            → INSPECT BUILDS
+          </a>
+          <a href="https://github.com/Yogeshwari2908-max" target="_blank" class="cyber-btn">
+            <i class="fab fa-github"></i> GITHUB PROFILE
+          </a>
+        </div>
+        <div class="hero-social-row">
+          <a href="https://github.com/Yogeshwari2908-max" target="_blank" class="hero-soc">
+            <i class="fab fa-github"></i> YOGESHWARI2908-MAX
+          </a>
+          <a href="https://www.instagram.com/yog_zzz07_/" target="_blank" class="hero-soc insta">
+            <i class="fab fa-instagram"></i> @YOG_ZZZ07_
+          </a>
+        </div>
+      </div>
+      <!-- Right: Photo -->
+      <div class="hero-photo-col">
+        <div class="film-frame">
+          <div class="film-strip left">
+            <div class="sprocket"></div><div class="sprocket"></div><div class="sprocket"></div>
+            <div class="sprocket"></div><div class="sprocket"></div><div class="sprocket"></div>
+            <div class="sprocket"></div><div class="sprocket"></div><div class="sprocket"></div>
+          </div>
+          <div class="film-photo-wrap">
+            <img src="yogeshwari.jpg" alt="Yogeshwari" />
+          </div>
+          <div class="film-strip right">
+            <div class="sprocket"></div><div class="sprocket"></div><div class="sprocket"></div>
+            <div class="sprocket"></div><div class="sprocket"></div><div class="sprocket"></div>
+            <div class="sprocket"></div><div class="sprocket"></div><div class="sprocket"></div>
+          </div>
+          <div class="film-label">YOGESHWARI · 2024 · DEV ⚡</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== ABOUT =========== -->
+  <section class="stack" id="about">
+    <div class="container">
+      <div class="cyber-frame reveal">
+        <div class="frame-tag-col">
+          <div class="frame-tag">
+            <span class="tag-num">01</span>
+            About
+          </div>
+        </div>
+        <div class="frame-content">
+          <h2 class="section-title">ABOUT <span class="hl">ME</span></h2>
+          <p class="about-text">
+            Hi! I'm <strong>Yogeshwari</strong>, a dedicated and enthusiastic developer with a passion for 
+            crafting elegant solutions to complex problems. I specialize in full-stack web development 
+            and have a deep love for Python, React, and modern web technologies.
+          </p>
+          <p class="about-text">
+            I believe that great software is not just about functionality — it's about the experience it creates. 
+            Whether it's designing seamless user interfaces or architecting robust backends, 
+            I bring creativity and precision to every project I take on.
+          </p>
+          <p class="about-text">
+            When I'm not coding, I enjoy exploring new technologies, learning about data science and AI, 
+            and continuously growing to stay at the forefront of the tech world.
+          </p>
+          <div class="about-info-grid">
+            <div class="info-item">
+              <span class="info-label">NAME :</span>
+              <span class="info-val">Yogeshwari</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">LOCATION :</span>
+              <span class="info-val">Tamil Nadu, India</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">GITHUB :</span>
+              <span class="info-val"><a href="https://github.com/Yogeshwari2908-max" target="_blank">Yogeshwari2908-max</a></span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">INSTAGRAM :</span>
+              <span class="info-val"><a href="https://www.instagram.com/yog_zzz07_/" target="_blank">@yog_zzz07_</a></span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">STATUS :</span>
+              <span class="info-val" style="color:var(--neon-green)">⚡ AVAILABLE</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">PASSION :</span>
+              <span class="info-val">Code · Design · Innovation</span>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;">
+            <a href="https://github.com/Yogeshwari2908-max" target="_blank" class="cyber-btn primary">
+              <i class="fab fa-github"></i> GITHUB PROFILE
+            </a>
+            <a href="#contact" class="cyber-btn">
+              ⚡ GET IN TOUCH
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== SKILLS / TOOLKIT =========== -->
+  <section class="stack" id="skills">
+    <div class="container">
+      <div class="cyber-frame reveal">
+        <div class="frame-tag-col">
+          <div class="frame-tag">
+            <span class="tag-num">02</span>
+            Toolkit
+          </div>
+        </div>
+        <div class="frame-content">
+          <h2 class="section-title">TECH <span class="hl">STACK</span></h2>
+          <p class="skills-intro">
+            Technologies I use to design, build, and ship projects — from frontend interfaces to backend systems 
+            and data pipelines.
+          </p>
+
+          <!-- Chip Tags -->
+          <div class="chips-grid">
+            <span class="cyber-chip highlight"><span class="chip-bolt">⚡</span> Python</span>
+            <span class="cyber-chip"><span class="chip-bolt">⚡</span> C Language</span>
+            <span class="cyber-chip"><span class="chip-bolt">⚡</span> C++</span>
+            <span class="cyber-chip"><span class="chip-bolt">⚡</span> Java</span>
+            <span class="cyber-chip highlight"><span class="chip-bolt">⚡</span> JavaScript</span>
+            <span class="cyber-chip"><span class="chip-bolt">⚡</span> HTML / CSS</span>
+            <span class="cyber-chip"><span class="chip-bolt">⚡</span> React.js</span>
+            <span class="cyber-chip"><span class="chip-bolt">⚡</span> Node.js</span>
+            <span class="cyber-chip"><span class="chip-bolt">⚡</span> Django</span>
+            <span class="cyber-chip"><span class="chip-bolt">⚡</span> MySQL &amp; MongoDB</span>
+            <span class="cyber-chip"><span class="chip-bolt">⚡</span> Data Analytics &amp; Science</span>
+            <span class="cyber-chip"><span class="chip-bolt">⚡</span> Git &amp; GitHub</span>
+            <span class="cyber-chip"><span class="chip-bolt">⚡</span> REST APIs</span>
+            <span class="cyber-chip" style="border-style:dashed;border-color:var(--neon-cyan);color:var(--neon-cyan)"><span class="chip-bolt" style="color:var(--neon-cyan)">⚡</span> AI / ML Integration ← learning</span>
+          </div>
+
+          <!-- Skill bars -->
+          <div class="skill-bars" id="skill-bars">
+            <div class="skill-bar-row">
+              <div class="skill-bar-header"><span>Python</span><span>88%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:88%"></div></div>
+            </div>
+            <div class="skill-bar-row">
+              <div class="skill-bar-header"><span>JavaScript</span><span>82%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:82%"></div></div>
+            </div>
+            <div class="skill-bar-row">
+              <div class="skill-bar-header"><span>HTML / CSS</span><span>92%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:92%"></div></div>
+            </div>
+            <div class="skill-bar-row">
+              <div class="skill-bar-header"><span>React.js</span><span>78%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:78%"></div></div>
+            </div>
+            <div class="skill-bar-row">
+              <div class="skill-bar-header"><span>Java</span><span>75%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:75%"></div></div>
+            </div>
+            <div class="skill-bar-row">
+              <div class="skill-bar-header"><span>MySQL / MongoDB</span><span>80%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:80%"></div></div>
+            </div>
+            <div class="skill-bar-row">
+              <div class="skill-bar-header"><span>Git &amp; GitHub</span><span>88%</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="--w:88%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== EDUCATION =========== -->
+  <section class="stack" id="education">
+    <div class="container">
+      <div class="cyber-frame reveal">
+        <div class="frame-tag-col">
+          <div class="frame-tag">
+            <span class="tag-num">03</span>
+            Education
+          </div>
+        </div>
+        <div class="frame-content">
+          <h2 class="section-title">ACADEMIC <span class="hl">BACKGROUND</span></h2>
+          <div class="timeline">
+            <div class="exp-card">
+              <div class="exp-date">2022 – PRESENT</div>
+              <h3>Bachelor of Engineering</h3>
+              <h4>Computer Science &amp; Engineering</h4>
+              <p>Pursuing B.E. in Computer Science with deep focus on software engineering, data structures, algorithms, and emerging technologies including AI and machine learning.</p>
+            </div>
+            <div class="exp-card">
+              <div class="exp-date">2020 – 2022</div>
+              <h3>Higher Secondary (12th)</h3>
+              <h4>Science — Physics / Chemistry / Maths / CS</h4>
+              <p>Completed higher secondary education with Physics, Chemistry, Mathematics and Computer Science. Developed strong analytical and problem-solving foundations.</p>
+            </div>
+            <div class="exp-card">
+              <div class="exp-date">2020</div>
+              <h3>Secondary Education (10th)</h3>
+              <h4>State Board — Tamil Nadu</h4>
+              <p>Completed secondary education with distinction, building a strong foundation in mathematics and sciences that fuels technical curiosity.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== PROJECTS / BUILDS =========== -->
+  <section class="stack" id="projects">
+    <div class="container">
+      <div class="cyber-frame reveal">
+        <div class="frame-tag-col">
+          <div class="frame-tag">
+            <span class="tag-num">04</span>
+            Builds
+          </div>
+        </div>
+        <div class="frame-content">
+          <h2 class="section-title">PROJECT <span class="hl">QUEUE</span></h2>
+          <div class="projects-grid">
+
+            <div class="queue-card active-build">
+              <div class="queue-badge"><span class="dot"></span> ⚡ Active Build</div>
+              <h3>Personal Portfolio</h3>
+              <p>A cyberpunk-themed developer portfolio built with pure vanilla HTML, CSS and JavaScript. Features terminal contact, holographic photo frame, and aurora canvas effects.</p>
+              <div class="queue-card-tags">
+                <span>HTML</span><span>CSS</span><span>JavaScript</span>
+              </div>
+              <a href="https://github.com/Yogeshwari2908-max" target="_blank" class="card-btn">
+                VIEW SOURCE → <i class="fab fa-github"></i>
+              </a>
+            </div>
+
+            <div class="queue-card">
+              <div class="queue-badge"><span class="dot"></span> Deployed System</div>
+              <h3>AI Chat Application</h3>
+              <p>An intelligent chat application powered by Python and machine learning models. Context-aware conversations, session memory, and an intuitive interface.</p>
+              <div class="queue-card-tags">
+                <span>Python</span><span>Flask</span><span>ML</span><span>REST API</span>
+              </div>
+              <a href="https://github.com/Yogeshwari2908-max" target="_blank" class="card-btn">
+                VIEW SOURCE → <i class="fab fa-github"></i>
+              </a>
+            </div>
+
+            <div class="queue-card">
+              <div class="queue-badge"><span class="dot"></span> Engine Component</div>
+              <h3>E-Commerce Platform</h3>
+              <p>Full-stack e-commerce solution with React frontend, Node.js REST API, and MongoDB. Features product catalog, shopping cart, and user authentication.</p>
+              <div class="queue-card-tags">
+                <span>React</span><span>Node.js</span><span>MongoDB</span>
+              </div>
+              <a href="https://github.com/Yogeshwari2908-max" target="_blank" class="card-btn">
+                VIEW SOURCE → <i class="fab fa-github"></i>
+              </a>
+            </div>
+
+            <div class="queue-card">
+              <div class="queue-badge"><span class="dot"></span> Analytics Pipeline</div>
+              <h3>Data Analytics Dashboard</h3>
+              <p>Interactive data dashboard built with Python. Visualizes analytics with dynamic charts using Pandas and Matplotlib. Fully responsive and filterable.</p>
+              <div class="queue-card-tags">
+                <span>Python</span><span>Pandas</span><span>Matplotlib</span>
+              </div>
+              <a href="https://github.com/Yogeshwari2908-max" target="_blank" class="card-btn">
+                VIEW SOURCE → <i class="fab fa-github"></i>
+              </a>
+            </div>
+
+            <div class="queue-card">
+              <div class="queue-badge"><span class="dot"></span> Backend System</div>
+              <h3>Student Management System</h3>
+              <p>Web-based student management system with CRUD operations, attendance tracking, and grade management, built using Django and MySQL with Bootstrap UI.</p>
+              <div class="queue-card-tags">
+                <span>Django</span><span>MySQL</span><span>Bootstrap</span>
+              </div>
+              <a href="https://github.com/Yogeshwari2908-max" target="_blank" class="card-btn">
+                VIEW SOURCE → <i class="fab fa-github"></i>
+              </a>
+            </div>
+
+            <div class="queue-card">
+              <div class="queue-badge"><span class="dot"></span> API Integration</div>
+              <h3>Weather Forecast App</h3>
+              <p>Real-time weather forecast app integrating OpenWeatherMap API. Displays current conditions, 5-day forecasts, and location-based weather with clean UI.</p>
+              <div class="queue-card-tags">
+                <span>JavaScript</span><span>REST API</span><span>CSS3</span>
+              </div>
+              <a href="https://github.com/Yogeshwari2908-max" target="_blank" class="card-btn">
+                VIEW SOURCE → <i class="fab fa-github"></i>
+              </a>
+            </div>
+
+          </div>
+          <div style="margin-top:24px;">
+            <a href="https://github.com/Yogeshwari2908-max" target="_blank" class="cyber-btn">
+              <i class="fab fa-github"></i> ALL REPOSITORIES →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== TERMINAL CONTACT =========== -->
+  <section class="stack" id="contact">
+    <div class="container">
+      <div class="cyber-frame reveal">
+        <div class="frame-tag-col">
+          <div class="frame-tag">
+            <span class="tag-num">05</span>
+            Transmit
+          </div>
+        </div>
+        <div class="frame-content">
+          <h2 class="section-title">CONTACT <span class="hl">TERMINAL</span></h2>
+
+          <div class="terminal-box">
+            <div class="terminal-header">
+              <span class="term-dot red"></span>
+              <span class="term-dot yellow"></span>
+              <span class="term-dot green"></span>
+              <span class="term-title">yogeshwari@dev:~$ — bash</span>
+            </div>
+            <div class="terminal-output" id="term-output">
+              <div class="term-line"><span class="term-prompt">yogeshwari@dev:~$ </span><span class="term-cmd">whoami</span></div>
+              <div class="term-line term-out bold">Yogeshwari — Developer &amp; Creator</div>
+              <div class="term-line">&nbsp;</div>
+              <div class="term-line"><span class="term-prompt">yogeshwari@dev:~$ </span><span class="term-cmd">cat contact.json</span></div>
+              <div class="term-line term-out cyan">{</div>
+              <div class="term-line term-out">&nbsp; "github"&nbsp;&nbsp;&nbsp;: "<a href="https://github.com/Yogeshwari2908-max" target="_blank" style="color:var(--neon-cyan)">Yogeshwari2908-max</a>",</div>
+              <div class="term-line term-out">&nbsp; "instagram": "<a href="https://www.instagram.com/yog_zzz07_/" target="_blank" style="color:var(--neon-cyan)">@yog_zzz07_</a>",</div>
+              <div class="term-line term-out">&nbsp; "location" : "Tamil Nadu, India",</div>
+              <div class="term-line term-out">&nbsp; "status"&nbsp;&nbsp; : "<span class="green">AVAILABLE FOR COLLABORATION</span>"</div>
+              <div class="term-line term-out cyan">}</div>
+              <div class="term-line">&nbsp;</div>
+              <div class="term-line"><span class="term-prompt">yogeshwari@dev:~$ </span><span class="term-cmd">echo "Let's build something amazing!"</span></div>
+              <div class="term-line term-out green">Let's build something amazing!</div>
+              <div class="term-line">&nbsp;</div>
+              <div class="term-line"><span class="term-prompt">yogeshwari@dev:~$ </span><span id="term-cursor" class="cursor-blink">_</span></div>
+            </div>
+            <div class="terminal-input-row">
+              <span class="term-input-prompt">yogeshwari@dev:~$ </span>
+              <input type="text" class="term-input" id="term-input" placeholder="type a command..." autocomplete="off" spellcheck="false" />
+            </div>
+            <div class="cmd-pills">
+              <span class="cmd-pill" data-cmd="help">help</span>
+              <span class="cmd-pill" data-cmd="bio">bio</span>
+              <span class="cmd-pill" data-cmd="skills">skills</span>
+              <span class="cmd-pill" data-cmd="projects">projects</span>
+              <span class="cmd-pill" data-cmd="github">github</span>
+              <span class="cmd-pill" data-cmd="instagram">instagram</span>
+              <span class="cmd-pill" data-cmd="contact">contact</span>
+              <span class="cmd-pill" data-cmd="clear">clear</span>
+              <span class="cmd-pill" data-cmd="quote">quote</span>
+            </div>
+          </div>
+
+          <div class="contact-actions">
+            <a href="https://github.com/Yogeshwari2908-max" target="_blank" class="cyber-btn primary">
+              <i class="fab fa-github"></i> GITHUB: @YOGESHWARI2908-MAX ↗
+            </a>
+            <a href="https://www.instagram.com/yog_zzz07_/" target="_blank" class="cyber-btn">
+              <i class="fab fa-instagram"></i> INSTAGRAM: @YOG_ZZZ07_ 📷
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========== FOOTER =========== -->
+  <footer class="cyber-footer">
+    <div class="container">
+      <div class="footer-logo">YOGE<span class="hl">⚡</span>SHWARI</div>
+      <p class="footer-tagline">DEVELOPER · CREATOR · INNOVATOR · TAMIL NADU, INDIA · 2024</p>
+      <div class="footer-socials">
+        <a href="https://github.com/Yogeshwari2908-max" target="_blank">
+          <i class="fab fa-github"></i> GITHUB
+        </a>
+        <a href="https://www.instagram.com/yog_zzz07_/" target="_blank">
+          <i class="fab fa-instagram"></i> INSTAGRAM
+        </a>
+      </div>
+      <p class="footer-copy">© 2024 YOGESHWARI · CRAFTED WITH ⚡ CODE &amp; CREATIVITY</p>
+    </div>
+  </footer>
+
+  <div class="back-to-top" id="back-to-top" title="Back to top">↑</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
